@@ -46,7 +46,7 @@ export default function PlaygroundGame({
       unitId: Sniper.id,
       variant: 0,
     },
-    displayName: 'Hot reloads!',
+    displayName: 'Kyle',
     factionName: 'Atlas',
     id: 'Demo-User-12',
     skills: [1],

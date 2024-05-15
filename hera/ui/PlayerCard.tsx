@@ -6,6 +6,7 @@ import {
 } from '@deities/apollo/lib/checkWinCondition.tsx';
 import { getSkillConfig, Skill } from '@deities/athena/info/Skill.tsx';
 import calculateBuildingCount from '@deities/athena/lib/calculateBuildingCount.tsx';
+import calculateUnitCount from '@deities/athena/lib/calculateUnitCount.tsx';
 import matchesPlayerList from '@deities/athena/lib/matchesPlayerList.tsx';
 import { Charge, TileSize } from '@deities/athena/map/Configuration.tsx';
 import type Player from '@deities/athena/map/Player.tsx';
@@ -24,6 +25,7 @@ import getColor from '@deities/ui/getColor.tsx';
 import Icon from '@deities/ui/Icon.tsx';
 import Building from '@deities/ui/icons/Building.tsx';
 import Crosshair from '@deities/ui/icons/Crosshair.tsx';
+import Zombie from '@deities/ui/icons/Zombie.tsx';
 import { BackgroundRainbowAnimation } from '@deities/ui/RainbowPulseStyle.tsx';
 import Stack from '@deities/ui/Stack.tsx';
 import { css, cx, keyframes } from '@emotion/css';
@@ -223,7 +225,7 @@ export default memo(function PlayerCard({
               <span style={{ color }}>{player.id}.</span> {user?.displayName}
               {isBot(player) && <Icon className={iconStyle} icon={Android} />}
             </div>
-            <Stack className={offsetStyle} gap nowrap stretch>
+            <Stack className={offsetStyle} gap nowrap>
               <Funds
                 className={cx(
                   ellipsis,
@@ -236,6 +238,10 @@ export default memo(function PlayerCard({
               <Stack>
                 <Icon className={iconStyle} icon={Building} />
                 <span>{calculateBuildingCount(map, player)}</span>
+              </Stack>
+              <Stack>
+                <Icon className={iconStyle} icon={Zombie} />
+                <span>{calculateUnitCount(map, player)}</span>
               </Stack>
               {winConditions
                 .filter(
