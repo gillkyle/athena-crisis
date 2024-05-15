@@ -5,6 +5,7 @@ import {
   escortedByPlayer,
 } from '@deities/apollo/lib/checkWinCondition.tsx';
 import { getSkillConfig, Skill } from '@deities/athena/info/Skill.tsx';
+import calculateBuildingCount from '@deities/athena/lib/calculateBuildingCount.tsx';
 import matchesPlayerList from '@deities/athena/lib/matchesPlayerList.tsx';
 import { Charge, TileSize } from '@deities/athena/map/Configuration.tsx';
 import type Player from '@deities/athena/map/Player.tsx';
@@ -21,6 +22,7 @@ import useInput from '@deities/ui/controls/useInput.tsx';
 import ellipsis from '@deities/ui/ellipsis.tsx';
 import getColor from '@deities/ui/getColor.tsx';
 import Icon from '@deities/ui/Icon.tsx';
+import Building from '@deities/ui/icons/Building.tsx';
 import Crosshair from '@deities/ui/icons/Crosshair.tsx';
 import { BackgroundRainbowAnimation } from '@deities/ui/RainbowPulseStyle.tsx';
 import Stack from '@deities/ui/Stack.tsx';
@@ -231,6 +233,10 @@ export default memo(function PlayerCard({
                 )}
                 value={shouldShow ? player.funds : '???'}
               />
+              <Stack>
+                <Icon className={iconStyle} icon={Building} />
+                <span>{calculateBuildingCount(map, player)}</span>
+              </Stack>
               {winConditions
                 .filter(
                   (condition) =>
